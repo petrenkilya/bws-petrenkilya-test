@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  bench:
+    build: ./bench/.
+    environment:
+      benchAddr: web:8010
+  web:
+    build: .
+    environment:
+      redisAddr: redis:6379
+    ports:
+      - "8010:8010"
+    depends_on:
+      - redis
+  redis:
+    image: "redis:alpine"
